@@ -6,7 +6,7 @@ public class Entree {
 	private String cuisine;
 	private boolean dinner;
 	
-	
+	public Entree() {}
 	
 	public Entree(int id, String name, String cuisine, boolean dinner) {
 		super();

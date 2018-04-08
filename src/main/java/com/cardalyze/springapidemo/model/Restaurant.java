@@ -10,6 +10,8 @@ public class Restaurant {
 	private boolean parking;
 	private List<Entree> menu;
 	
+	public Restaurant() {}
+	
 	public Restaurant(int id, String name, int rating, String city, boolean parking, List<Entree> menu) {
 		super();
 		this.id = id;
