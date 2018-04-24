@@ -2,12 +2,12 @@ package com.cardalyze.springapidemo.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.cardalyze.springapidemo.controller.RestaurantNotFoundException;
+import com.cardalyze.springapidemo.controller.RestaurantServiceException;
 import com.cardalyze.springapidemo.model.Entree;
 import com.cardalyze.springapidemo.model.Restaurant;
 
@@ -25,10 +25,11 @@ public class RestaurantService implements RestaurantServiceInterface {
 	 * @see com.cardalyze.springapidemo.service.RestaurantServiceInterface#addRestaurant(com.cardalyze.springapidemo.model.Restaurant)
 	 */
 	@Override
-	public int addRestaurant(Restaurant restaurant)
+	public int addRestaurant(Restaurant restaurant) throws RestaurantServiceException
 	{
+		if(restaurant.getId() == 0 || restaurant.getName() == null) throw new RestaurantServiceException("Id or Name not specified", null);
 		restaurants.add(restaurant);
-		return restaurants.size();
+		return restaurant.getId();
 	}
 	/* (non-Javadoc)
 	 * @see com.cardalyze.springapidemo.service.RestaurantServiceInterface#getRestaurantById(int)

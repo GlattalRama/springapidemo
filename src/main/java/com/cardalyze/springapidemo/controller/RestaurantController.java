@@ -28,6 +28,7 @@ public class RestaurantController {
 	{
 		if (restaurant == null)
 			throw new RestaurantServiceException("Request does not contain a valid Restaurant Object", null);
+		if(1==1)throw new NullPointerException();
 		return restaurantService.addRestaurant(restaurant);
 	}
 	@GetMapping ("/restaurants/{id}")
