@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class RestaurantServiceExceptionHandler {
 	
-	public ResponseEntity<ErrorResponse> handleServiceException(RestaurantServiceException e) throws Exception
+	@ExceptionHandler(RestaurantServiceException.class) public ResponseEntity<ErrorResponse> handleServiceException(RestaurantServiceException e) throws Exception
 	{
 		ErrorResponse eR = new ErrorResponse();
 		eR.setCode(HttpStatus.BAD_REQUEST.value());
