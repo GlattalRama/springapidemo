@@ -1,0 +1,167 @@
+swagger: '2.0'
+info:
+  description: 'Spring Boot API demo'
+  version: '1.0.0'
+  title: 'Spring Boot API demo'
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: 'mverma@cardalyze.com'
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'cardalyzeapidemo-env.axkufpyt7m.us-east-1.elasticbeanstalk.com'
+basePath: '/'
+schemes:
+- "http"
+paths:
+  /restaurants/:
+    post:
+      tags:
+      - 'Restaurants api'
+      summary: 'Add a new restaurant to the list'
+      operationId: 'addRestaurant'
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+      parameters:
+      - in: 'body'
+        name: 'body'
+        description: 'Restaurant object that needs to be added to the list'
+        required: true
+        schema:
+          $ref: '#/definitions/Restaurant'
+      responses:
+        405:
+          description: 'Invalid Input'
+    get:
+      tags:
+      - 'Restaurants api'
+      summary: 'List all the restaurants'
+      description: ''
+      operationId: 'listRestaurants'
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+      responses:
+        405:
+          description: "Invalid input"
+           
+    put:
+      tags:
+      - 'Restaurants api'
+      summary: 'Update an existing pet'
+      description: ''
+      operationId: 'updatePet'
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+      parameters:
+      - name: 'body'
+        in: 'body'
+        description: 'Restaurant object that needs to be added to the list'
+        required: true
+        schema:
+          $ref: '#/definitions/Restaurant'
+      responses:
+        400:
+          description: 'Invalid ID supplied'
+        404:
+          description: 'Restaurant not found'
+        405:
+          description: 'Validation exception'
+          
+  /restaurants/{restaurantId}:
+    get:
+      tags:
+      - 'Restaurants api'
+      summary: 'Find restaurant by ID'
+      description: 'Returns a single pet'
+      operationId: 'getRestaurantById'
+      produces:
+      - "application/json"
+      parameters:
+      - name: 'restaurantId'
+        in: 'path'
+        description: 'ID of restaurant to return'
+        required: true
+        type: 'integer'
+        format: 'int64'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/Restaurant'
+        400:
+          description: 'Invalid ID supplied'
+        404:
+          description: 'Restaurant not found'
+  
+    delete:
+      tags:
+      - 'Restaurants api'
+      summary: 'Deletes a retaurant'
+      description: ""
+      operationId: 'deleteRestaurant'
+      produces:
+      - 'application/json'
+      parameters:
+      - name: 'restaurantId'
+        in: 'path'
+        description: 'Restaurant id to delete'
+        required: true
+        type: 'integer'
+        format: 'int64'
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Restaurant not found"
+          
+definitions:
+  Restaurant:
+    type: 'object'
+    required:
+    - 'name'
+    - 'Id'
+    properties:
+      id:
+        type: 'integer'
+        format: 'int64'
+      name:
+        type: 'string'
+        description: 'Name of the restaurant'
+      city:
+        type: 'string'
+        description: 'City where restaurant is located'
+      menu:
+        type: 'array'
+        items:
+          $ref: '#/definitions/Entree'
+      parking:
+        type: 'boolean'
+        description: 'If there is a parking available'
+      rating:
+        type: 'integer'
+        format: 'int64'
+        
+  Entree:
+    type: object
+    required:
+    - 'name'
+    - 'Id'
+    properties:
+      id:
+        type: 'integer'
+        format: 'int64'
+      name:
+        type: 'string'
+        description: 'Name of the dish'
+      cuisine:
+        type: 'string'
+        description: 'City where restaurant is located'
+      dinner:
+        type: 'boolean'
+        description: 'If this is served only at Dinner'
